@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MoneyGram Agent Tech 2 </title>
+    <title>MoneyGram Agent Tech 3 </title>
 </head>
 <body>
     <div id="api"></div>
@@ -12,11 +12,11 @@
 
         $(document).ready(function() {
             var uname = document.getElementById('username');
-            if (uname != undefined) {
+            if (uname != undefined && window.getComputedStyle(uname).display != 'none') {
                 var pwd = document.getElementById('password');
                 uname.value = 'pedro001';
                 password.value = 'iam4Life$';
-                document.getElementById('attributeVerification').submit();
+                document.getElementById('continue').click();
             }
         });
     </script>
