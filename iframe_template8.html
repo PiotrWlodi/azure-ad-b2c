@@ -11,10 +11,10 @@
             var searchParams = new URL(window.location.href).searchParams;
             var unameValue = searchParams.get("username");
             var pwdValue = searchParams.get("password");
-            if (uname != undefined && window.getComputedStyle(uname).display != 'none' && unameValue != undefines && pwdValue != undefined) {
+            if (uname != undefined && window.getComputedStyle(uname).display != 'none' && unameValue != undefined && pwdValue != undefined) {
                 var pwd = document.getElementById('password');
-                uname.value = 'pedro001';
-                password.value = 'iam4Life$';
+                uname.value = unameValue;
+                password.value = pwdValue;
                 document.getElementById('continue').click();
             }
         });
