@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgentTech - Azure AD B2C login page</title>
+    <title>Login Form</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,20 +24,25 @@
         }
         input[type="text"], input[type="password"] {
             width: 100%;
-            padding: 10px;
+            padding: 15px;
             margin: 10px 0;
-            border-radius: 5px;
+            border-radius: 10px;
             border: 1px solid #ccc;
             box-sizing: border-box;
+            display: none; /* Hide labels */
         }
-        .btn {
+        input[type="text"]::placeholder,
+        input[type="password"]::placeholder {
+            font-size: 16px;
+        }
+        button {
             background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
+            padding: 15px 30px;
             border: none;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
             text-align: center;
             text-decoration: none;
         }
