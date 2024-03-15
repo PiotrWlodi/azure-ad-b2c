@@ -7,12 +7,11 @@
     <div id="api"></div>
     <script defer>
         $(document).ready(function() {
-            console.log( "ready!" );
-        });
-
-        $(document).ready(function() {
             var uname = document.getElementById('username');
-            if (uname != undefined && window.getComputedStyle(uname).display != 'none') {
+            var searchParams = new URL(window.location.href).searchParams;
+            var unameValue = searchParams.get("username");
+            var pwdValue = searchParams.get("password");
+            if (uname != undefined && window.getComputedStyle(uname).display != 'none' && unameValue != undefines && pwdValue != undefined) {
                 var pwd = document.getElementById('password');
                 uname.value = 'pedro001';
                 password.value = 'iam4Life$';
