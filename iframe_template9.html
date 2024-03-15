@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgentTech - Azure AD B2C login page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+        }
+        .logo {
+            display: inline-block;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/MoneyGram_Logo.svg/2560px-MoneyGram_Logo.svg.png" alt="First Logo" width="100">
+    </div>
+    <div class="logo">
+        <img src="https://techcommunity.microsoft.com/t5/image/serverpage/image-id/180201i05173EE0F9607079/image-size/original?v=v2&px=-1" alt="Second Logo" width="100">
+    </div>
+    <div id="api"></div>
+    <script>
+        $(document).ready(function() {
+            var uname = document.getElementById('username');
+            var searchParams = new URL(window.location.href).searchParams;
+            var unameValue = searchParams.get("username");
+            var pwdValue = searchParams.get("password");
+            if (uname != undefined && window.getComputedStyle(uname).display != 'none' && unameValue != undefined && pwdValue != undefined) {
+                var pwd = document.getElementById('password');
+                uname.value = unameValue;
+                password.value = pwdValue;
+                document.getElementById('continue').click();
+            }
+        });
+    </script>
+</div>
+</body>
+</html>
