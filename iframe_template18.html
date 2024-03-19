@@ -87,14 +87,71 @@
             var uname = document.getElementById('username');
             var searchParams = new URL(window.location.href).searchParams;
             var unameValue = searchParams.get("username");
-            var pwdValue = searchParams.get("password");
-            if (uname != undefined && window.getComputedStyle(uname).display != 'none' && unameValue != undefined && pwdValue != undefined) {
-                var pwd = document.getElementById('password');
+            if (uname != undefined && window.getComputedStyle(uname).display != 'none' && unameValue != undefined) {
                 uname.value = unameValue;
-                password.value = pwdValue;
-                document.getElementById('continue').click();
             }
+            const request = JSON.stringify({
+                header: {action: 'GetDeviceId', requestId: generateGuid()},
+                data: {payload: {}}
+            });
+		    getDeviceId(request);
         });
+
+        function processWebSocketResponse(response) {
+            try {
+                const parsedResponse = JSON.parse(response);
+                if (!!parsedResponse.header && parsedResponse.header.status === (6 || '6')) {
+                    // console.log('Websocket request acknowledged.');
+                    return;
+                } else if (parsedResponse.header.action === 'GetPlatformCapabilities') {
+                    return;
+                }
+
+                if (!!parsedResponse.data && !!parsedResponse.data.payload) {
+                    const headers = parsedResponse.data.payload.reduce((accumulator, currVal) => {
+                            accumulator[currVal.name] = currVal.value;
+                            return accumulator;
+                        },
+                        {}
+                    );
+                    console.log(headers);
+                } else {
+                    console.error('No fingerprinting data returned by MGI Services.');
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function getDeviceId(request) {
+            try {
+                const socket = new WebSocket('wss://localhost:28542');
+                socket.onopen = (event) => {
+                    socket.send(request);
+                };
+                socket.onmessage = (event) => {
+                    processWebSocketResponse(event.data);
+                };
+                socket.onerror = (event) => {
+                    console.error('WebSocket error observed:', event);
+                    console.log(event);
+                };
+                socket.onclose = (event) => {
+                    console.log('Websocket connection closed:', event);
+                };
+            } catch (err) {
+                console.log(`${err.name}: ${err}`);
+            }
+        }
+
+        generateGuid = function () {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+            }
+            return (s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4());
+        };
     </script>
 </div>
 </body>
